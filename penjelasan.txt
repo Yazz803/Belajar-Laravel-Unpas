@@ -1,0 +1,3 @@
+Untuk bisa menjalankan web servernya laravel, cukup tulis nama foldernya di url browser. 
+
+untuk bisa melakukan hal tersebut, dibutuhkan valet, untuk valet windows bisa didapatkan di pakagist.org, search aja valet-windows, nanti ikutin aja prosedurnya. abis itu ketika valetnya udh diinstall, kita hanya perlu menuliskan valet park di cmd atau git bash kita (didalam folder yg ada folder isi laravelnya) agar laravelnya bisa dijalankan tanpa harus command php artisan serve.

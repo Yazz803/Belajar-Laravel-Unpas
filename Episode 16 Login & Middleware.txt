@@ -1,0 +1,12 @@
+#authentication
+=sebetulnya laravel ini menyediakan yg namanya starter kits, jadi ada semacam plugin atau aplikasi yg khusus menangani masalah authentication ini, ada yg namanya laravel breeze, dan ada satulagi namanya laravel jet-stream, dengan menggunakan aplikasi itu, kita dapat dengan mudah menangani masalah autentifikasi ini, mulai dari registrasi user, login, dan ada juga fitur verifikasi lewat email, ada remember me, ada forgot password, pokoknya semua yg ada hubungannya dengan authetication dan authorization, itu sudah ditangani oleh stater kits ini.
+
+baca aja dokumentasinya di laravel tentang authentication->starter kits->laravel breeze
+
+
+Sekarang kita akan pakenya yg manually authentication, laravel punya authentication services lewat facade
+
+#middleware
+middleware menyediakan mekanisme yang memudahkan kita untuk melakukan inspeksi dan filetering http request, jadi request kita di filter dulu sama middleware ini. contohnya laravel sudah menyediakan middleware didalamnya, yg melakukan verifikasi apakah seorang user dari aplikasi kita itu udah ter-autentikasi atau belum, jika belum maka middleware tadi akan melakukan redirect user tadi ke halaman login, atau halaman yg kita inginkan terserah. tapi kalau misalnya udah ter-autentifiksi, nanti si middlewarenya itu memperbolehkan kita untuk lanjut masuk ke dalam aplikasinya.
+
+ada yg namanya global middleware, yg artinya secara otomatis dijalankan, setiap request http kita dijalankan, adanya di app/Http/Kernel.php

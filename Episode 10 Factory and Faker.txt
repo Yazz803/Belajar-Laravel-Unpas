@@ -1,0 +1,5 @@
+#Introducion
+
+untuk documentasi dari materi faker ini, bisa dilihat di website fakerphp.github.io dan bisa dilihat menunya, ada formatters, locales, dll
+
+intinya adalah dengan menggunakan factory & faker, bisa mempercepat dalam pengisian data field dalam table. dan datanya adalah data dummy/fake, ini untuk proses development aja

@@ -1,0 +1,8 @@
+# Introduction
+kita bisa mengisi otomatis table kita ketika kita buat, jadi kita panen isi tablenya. Laravel memiliki kemampuan melakukan seed di dalam database kita dengan data testing caranya dengna menggunakan class seed.
+
+Data yg masuk ke dalam database dengan menggunakan seeder ini adalah data dummy (bisa dipakai ketika development) untuk memudahkan ketika ingin membuat data dummy secara banyak
+
+php artisan migrate:fresh --seed
+
+jadi perintah diatas ini akan menghapus dan membuat kembali table yg ada di database sekalian mengirimkan seed/data yg telah dibuat di DatabaseSeeder

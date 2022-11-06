@@ -1,0 +1,15 @@
+kita bisa mengirimkan data lewat route
+
+Route::get('/about', function () {
+    return view('about', [
+	"name" => "Muhammad Yazid Akbar",
+	"age" => 17
+]);
+});
+
+Jadi di route about ini menyimpan data array assoc, yg barisi name dan age. ini bisa kita panggil dengan cara
+
+<h1><?= $name ;?></h1>
+<p><?= $age;?></p>
+
+nanti itu akan menampilkan data name yg ada di route about, begitupun dengan age

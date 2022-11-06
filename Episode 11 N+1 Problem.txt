@@ -1,0 +1,33 @@
+# N+1 Problem 
+
+N+1 Problem ini terjadi, ketika aplikasi kita mengambil data dari database dan dimana didalamnya kita melakukan looping terhadap data kita. yg terjadi adalah, kita akan melakukan pemanggilan ke dalam database atau querynya berulang-ulang. sehingga nanti aplikasinya itu yg harusnya hanya melakukan 2 query, query kesemua dan query ke data yg ada didalamnya, malah akan menambahkan (N) query.
+
+sebenarnya tidak ada problem saat pemanggilan querynya di controller post,
+contoh : 'posts' => Post::latest()->get()
+ini tidak ada masalah yg terjadi, masalahnya ada ketika kita melakukan looping pada posts.blade.php-nya 
+
+ketika kita melakukan looping ke semua postingan kita, kita butuh table lain, nah ini problemnya, ada table author dan table category, jadi kita query lagi didalam looping, problemnya adalah setiap kita melakukan query untuk ngecek authornya siapa, itu dia melakukan pemanggilan terhadap database, looping author($post-author>name), dia connect ke database, query lagi ke database, mau manggil category($post->category->name) juga sama. padahal query yg dilakukan itu hanya 3, ambil semua postingan, ambil semua author, dan ambil semua category. 
+Jadi misal didalam table posts, ada user dan category, dan misal ada 20 posts, maka ada 40 query yg akan dilakukan (20x ke table user + 20x ke table category)
+
+Itu adalah N+1 problem, karena aplikasinya masih kecil, belum ada banyak postingan didalamnya, masih gk ada masalah mengenai performanya, tapi ketika postingannya sudah banyak misal 2000, maka itu akan memperlambat aplikasinya
+
+ada yg namanya lazy loading (males, jadi dia melakukan ketika dibutuhin)
+ada juga yg namanya Eager Loading (Eager artinya semangat), jadi lakukan semuanya diawal, sehingga kita udah punya datanya, sehingga pada saat looping nanti gk perlu melakukan pemanggilan data ke database lagi. 
+
+penjelasan eager loading:
+pada saat kita mengakses sebuah relationship didalam sebuah eloquent (setiap pake belongsTo, hasMany, dsb) maka modelnya akan melakukan sebuah teknik yg namanya lazy loading, artinya data relationshipnya ini gk di load/dipanggil, sampe nantinya kita mengakses propertynya pada saat kita looping. tapi kita bisa meminta si eloquent-nya agar melakukan "eager load" ketika kita melakukan query pada parent-nya, ketika kita melakukan query dipostingannya, nanti dia sekalian juga nge-query langsung author dan category-nya. Eager loading ini kita lakukan untuk menghindari N+1 problem. 
+
+jadi kita kasih depannya 'with' sebelum kita ambil semua datanya
+contoh : $books = Book::with('author')->get();
+ini maksudnya, kita akan tambahkan with, terus table apa yg mau kita tambahin, terus ambil latest, terus ambil get. Itu tablenya hanya satu, jika ingin dua, maka harus pakai array.
+contoh : $books = Book::with(['author', 'publish'])->get();
+
+Ada juga yg namannya Lazy Eager Loading, jadi digabung lazy loading dengan eager loading
+Penjelasan :
+kadang2 kita butuh melakukan eager loading pada relationship kita, tapi setelah si parentnya sudah didapatkan. jadi gk sekalian diambil karena kita lagi melakukan Route Model Binding, jadi kita gk pake 'with', tapi kita pakeknya 'load'
+contoh: 
+if ($someCondition) {
+	$books->load('author', 'publisher');
+}
+Jadi, pada saat manggil si authornya, kita load juga model sisanya, pada saat kita ngambil model yg sudah melakukan Route Model Binding. 
+

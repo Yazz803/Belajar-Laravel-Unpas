@@ -1,0 +1,144 @@
+php artisan migrate
+
+perintah ini akan menjalankan fungsi up yg ada di folder migrations>2014_10_12_00000_create_users_table
+
+jadi nanti akan dibuatkan table secara otomatis lewat codingannya tanpa harus buat table manual di database mysql nya.
+
+
+php artisan migrate:rollback
+
+perintah ini akan merollback atau mengembalikan atau drop table yg sudah dibuat di function up yg ada di migration tadi (table migrationsnya tidak akan hilang, karena itu mirip dengan .git jadi dengan adanya migratios ini, kita bisa lihat perubahan apa yg terjadi)
+
+
+php artisan migrate:fresh
+
+perintah ini akan menghapus table dan membuat table yg baru ketika ada perubahan pada function up nya
+
+
+
+ada yg namanya APP_ENV=local di dalam file .env
+jadi itu artinya environmentnya masih ada di local, jika di ganti jadi production, ketika kita melakukan command php artisan migrate:fresh, maka nanti akan muncul warning yg isinya "Application in production!" dan akan ada perintah confirm apakah command migrate itu akan dijalankan atau tidak.
+
+
+Eloquent ORM (object-relational mapper)
+sebuah fungsi untuk memetakan tiap2 data yg ada di dalam table atau database nanti ke dalam sebuah object.
+ketika menggunakan eloquent, setiap table di dalam database itu terhubung ke dalam sebuah "model" untuk bisa kita interaksi dengan tablenya. selain kita mengambil record/data dari database kita, eloquent model ini memungkinkan kita juga untuk melakukan CRUD lewat codingan
+
+active record pattern adalah pendekatan untuk mengakses data di dalam database. jadi table di dalam database kita itu dibungkus dalam sebuah class.jika sudah ada class yg mempresentasikan sebagai table, tiap data (row) itu terhubung ke dalam instance dari classnya (object). setelah membuat object/instance dari classnya, maka baris baru ditablenya akan ditambahkan ketika kita melakukan save. Active record pattern ini biasanya digunakan dalam ORM.
+
+masuk ke terminal lalu ketik php artisan tinker, jika sudah masuk dan ingin membuat user baru, ketik $user yg berisi instance dari class users sebagai model kita.
+
+contoh : $user = new App\Models\User;
+cnotho2: $user = new User;
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan tinker
+Psy Shell v0.11.6 (PHP 8.0.10 — cli) by Justin Hileman
+>>> $user = new User; // untuk menambahkan user baru
+[!] Aliasing 'User' to 'App\Models\User' for this Tinker session.
+=> App\Models\User {#3549}
+
+>>> $user->name = 'Muhammad Yazid Akbar';
+=> "Muhammad Yazid Akbar"
+
+>>> $user->email = 'muhammadyazidakbar@gmail.com';
+=> "muhammadyazidakbar@gmail.com"
+
+>>> $user->password = bcrypt('123')
+=> "$2y$10$w7TO6itEFLbADsgh.p1x/Omnh/ja.FZO2NOJW7F5ylZIrGmN6/trO"
+
+>>> $user->save()
+=> true
+
+>>> $user->all()
+=> Illuminate\Database\Eloquent\Collection {#4233
+     all: [
+       App\Models\User {#4481
+         id: 1,
+         name: "Muhammad Yazid Akbar",
+         email: "muhammadyazidakbar@gmail.com",
+         email_verified_at: null,
+         #password: "$2y$10$w7TO6itEFLbADsgh.p1x/Omnh/ja.FZO2NOJW7F5ylZIrGmN6/trO",
+         #remember_token: null,
+         created_at: "2022-07-06 00:26:39",
+         updated_at: "2022-07-06 00:26:39",
+       },
+     ],
+   }
+
+>>> $user = new User
+=> App\Models\User {#3873}
+
+>>> $user->name = 'Firdaus'
+=> "Firdaus"
+
+>>> $user->email = 'firdaus@gmail.com'
+=> "firdaus@gmail.com"
+
+>>> $user->password = '1234'
+=> "1234"
+
+>>> $user->password = bcrypt('1234')
+=> "$2y$10$sPeAJEHrN3J2IaFInytoC.j3woWf.Op9tTp19qgI2Sa3wFMaaa6GW"
+
+>>> $user->save()
+=> true
+
+>>> $user->all()
+=> Illuminate\Database\Eloquent\Collection {#4481
+     all: [
+       App\Models\User {#4483
+         id: 1,
+         name: "Muhammad Yazid Akbar",
+         email: "muhammadyazidakbar@gmail.com",
+         email_verified_at: null,
+         #password: "$2y$10$w7TO6itEFLbADsgh.p1x/Omnh/ja.FZO2NOJW7F5ylZIrGmN6/trO",
+         #remember_token: null,
+         created_at: "2022-07-06 00:26:39",
+         updated_at: "2022-07-06 00:26:39",
+       },
+       App\Models\User {#4484
+         id: 2,
+         name: "Firdaus",
+         email: "firdaus@gmail.com",
+         email_verified_at: null,
+         #password: "$2y$10$sPeAJEHrN3J2IaFInytoC.j3woWf.Op9tTp19qgI2Sa3wFMaaa6GW",
+         #remember_token: null,
+         created_at: "2022-07-06 00:32:58",
+         updated_at: "2022-07-06 00:32:58",
+       },
+     ],
+   }
+
+>>> $user->first()
+=> App\Models\User {#4486
+     id: 1,
+     name: "Muhammad Yazid Akbar",
+     email: "muhammadyazidakbar@gmail.com",
+     email_verified_at: null,
+     #password: "$2y$10$w7TO6itEFLbADsgh.p1x/Omnh/ja.FZO2NOJW7F5ylZIrGmN6/trO",
+     #remember_token: null,
+     created_at: "2022-07-06 00:26:39",
+     updated_at: "2022-07-06 00:26:39",
+   }
+
+>>> $user->find(2) // hanya untuk mencari id user
+=> App\Models\User {#4270
+     id: 2,
+     name: "Firdaus",
+     email: "firdaus@gmail.com",
+     email_verified_at: null,
+     #password: "$2y$10$sPeAJEHrN3J2IaFInytoC.j3woWf.Op9tTp19qgI2Sa3wFMaaa6GW",
+     #remember_token: null,
+     created_at: "2022-07-06 00:32:58",
+     updated_at: "2022-07-06 00:32:58",
+   }
+
+>>> $user->find(200)
+=> null
+
+>>> $user->findOrFail(2000)
+Illuminate\Database\Eloquent\ModelNotFoundException with message 'No query results for model [App\Models\User] 2000'
+>>>
+
+untuk bisa keluar dari tinker ini, tekan ctrl+c

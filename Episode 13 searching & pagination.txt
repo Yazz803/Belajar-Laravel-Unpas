@@ -1,0 +1,43 @@
+# Query Scope
+dengan menggunakan local Scopes, itu memungkinkan kita untuk mendefinisikan query2 umum yg bisa kita gunakan kembali didalam aplikasi kita, contohnya kalau misalkan kita butuh untuk secara sering mengambil data user yg kita anggap populer.
+
+untuk bisa menjalankan itu, kita butuh model yg berisikan method scopePopular($query) => kata didepan 'scope'nya bebas mau dinamain apa aja. 
+
+contoh :
+public function scopePopular($query)
+{	// disini kita tinggal tulis klausul tambahannya apa, misalkan didepan udh kita cari "SELECT * FROM User", kalau mau cari yang populer, kita tinggal tambahin/sisipkan 'where' dan misalkan yg vote dia lebih dari seratus.
+	return $query->where('votes','>',100);
+}
+
+cara untuk memanggilnya kita bisa langsung panggil di methodnya
+Contoh :
+use App\Models\User;
+
+$users = User::popular()->active->orderBy('created_by')->get();
+
+
+
+#Method When (ada di collection)
+when method itu akan dijalankan ketika first argumen berisi true
+
+#null coalescing operator
+null coalescing operator yaitu (??) sudah ditambahkan di php 7 supaya menambahkan syntactic sugar (pemanis, supaya nulisnya gampang) saat kita butuh untuk menggunakan ternary dan juga digunakan untuk ngecek isset()
+
+#pagination
+cara menggunakan pagination adalah kita tinggal panggil method paginate() saja, dan isinya adalah jumlah postingan yg ingin ditampilkan. 
+contoh : (didalam PostControllernya)
+return view('posts', [
+            "title" => "All Posts" . $title,
+            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7), // filter ini didapatkan dari Post Model
+            'gambar' => Controller::BASEURL,
+            'active' => 'posts'
+        ]);
+
+dan jika ingin menampilkan paginationnya di halaman view tinggal kasih {{ $posts->links() }}. ini defaultnya tampilan paginationnya adalah memakai tailwind, jika ingin mengubahnya menjadi tampilan dari bootstrap, kita pergi ke folder App->providers->appserviceprovider.php
+
+nah nanti di method boot nya, kasih code : 
+use Illuminate\Pagination\Paginator;
+
+Paginator::useBootstrap();
+
+

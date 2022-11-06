@@ -1,0 +1,5 @@
+#introduction
+
+tabel didalam database kita itu biasanya berelasi satu sama lain, contohnya kita bikin sistem web blog, didalam web blog post itu mungkin aja bisa memiliki banyak komentar, selain komentar ini berelasi dengan postingannya, komentar juga berelasi kepada siapa yang mengirimkan komentarnya, jadi post bisa berelasi dengan komen dan juga user. 
+
+Eloquent itu mengelola dan bekerja dengan relationship ini menjadi gampang dan mendukung berbagai macam relationship yg ada didalam database.  

@@ -1,0 +1,322 @@
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan help make:model
+Description:
+  Create a new Eloquent model class
+
+Usage:
+  make:model [options] [--] <name>
+
+Arguments:
+  name                  The name of the class
+
+Options:
+  -a, --all             Generate a migration, seeder, factory, policy, and resource controller for the model
+  -c, --controller      Create a new controller for the model
+  -f, --factory         Create a new factory for the model
+      --force           Create the class even if the model already exists
+  -m, --migration       Create a new migration file for the model
+      --morph-pivot     Indicates if the generated model should be a custom polymorphic intermediate table model
+      --policy          Create a new policy for the model
+  -s, --seed            Create a new seeder for the model
+  -p, --pivot           Indicates if the generated model should be a custom intermediate table model
+  -r, --resource        Indicates if the generated controller should be a resource controller
+      --api             Indicates if the generated controller should be an API controller
+  -R, --requests        Create new form request classes and use them in the resource controller
+      --test            Generate an accompanying PHPUnit test for the Model
+      --pest            Generate an accompanying Pest test for the Model
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for deb
+ug
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$
+
+
+============================================================================================
+Menambahkan data post baru menggunakan tinker
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan migrate:fresh
+Dropped all tables successfully.
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table (54.13ms)
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table (60.85ms)
+Migrating: 2019_08_19_000000_create_failed_jobs_table
+Migrated:  2019_08_19_000000_create_failed_jobs_table (52.32ms)
+Migrating: 2019_12_14_000001_create_personal_access_tokens_table
+Migrated:  2019_12_14_000001_create_personal_access_tokens_table (73.35ms)
+Migrating: 2022_07_06_004648_create_posts_table
+Migrated:  2022_07_06_004648_create_posts_table (25.32ms)
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan tinker
+Psy Shell v0.11.6 (PHP 8.0.10 — cli) by Justin Hileman
+>>> $post = new Post
+[!] Aliasing 'Post' to 'App\Models\Post' for this Tinker session.
+=> App\Models\Post {#3548}
+
+>>> $post->title = 'Judul Pertama'
+=> "Judul Pertama"
+
+>>> $post->excerpt = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipis
+ci delectus veniam fugit totam itaque qui blanditiis maxime nostrum'
+=> "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectus veniam
+ fugit totam itaque qui blanditiis maxime nostrum"
+
+>>> $post->body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci
+delectus veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptat
+es ex! Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commod
+i assumenda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus!
+Soluta, sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit.'
+=> "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectus veniam
+ fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates ex! Quas del
+ectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sin
+t consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt ve
+lit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit."
+
+>>> $post->save()
+=> true
+
+>>> $post = new Post
+=> App\Models\Post {#4268}
+
+>>> $post->title = 'Judul Kedua'
+=> "Judul Kedua"
+
+>>> $post->excerpt = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipis
+ci delectus veniam fugit totam itaque qui blanditiis maxime nostrum,'
+=> "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectus veniam
+ fugit totam itaque qui blanditiis maxime nostrum,"
+
+>>> $post->body = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci
+delectus veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptat
+es ex! Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commod
+i assumenda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus!
+Soluta, sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit. Quas delectus veniam
+ quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sint consequatu
+r porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt velit repudian
+dae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit.'
+=> "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectus veniam
+ fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates ex! Quas del
+ectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sin
+t consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt ve
+lit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit. Quas delectus veniam quos qui, repe
+llat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sint consequatur porro reprehe
+nderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt velit repudiandae nostrum vol
+uptas a architecto qui ipsa culpa accusamus, cum impedit."
+
+>>> $post->save()
+>>>
+>>>
+>>>
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ Post::all()
+>
+> ^C
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan tinker
+Psy Shell v0.11.6 (PHP 8.0.10 — cli) by Justin Hileman
+>>> Post::all()
+[!] Aliasing 'Post' to 'App\Models\Post' for this Tinker session.
+=> Illuminate\Database\Eloquent\Collection {#3871
+     all: [
+       App\Models\Post {#4478
+         id: 1,
+         title: "Judul Pertama",
+         excerpt: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci
+delectus veniam fugit totam itaque qui blanditiis maxime nostrum",
+         body: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci del
+ectus veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates
+ex! Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi a
+ssumenda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Sol
+uta, sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit.",
+         published_at: null,
+         created_at: "2022-07-06 00:55:41",
+         updated_at: "2022-07-06 00:55:41",
+       },
+       App\Models\Post {#4479
+         id: 2,
+         title: "Judul Kedua",
+         excerpt: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci
+delectus veniam fugit totam itaque qui blanditiis maxime nostrum,",
+         body: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci del
+ectus veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates
+ex! Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi a
+ssumenda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Sol
+uta, sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit. Quas delectus veniam qu
+os qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sint consequatur p
+orro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt velit repudiandae
+ nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit.",
+         published_at: null,
+         created_at: "2022-07-06 00:57:28",
+         updated_at: "2022-07-06 00:57:28",
+       },
+     ],
+   }
+
+>>> Post::first()
+=> App\Models\Post {#4485
+     id: 1,
+     title: "Judul Pertama",
+     excerpt: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci dele
+ctus veniam fugit totam itaque qui blanditiis maxime nostrum",
+     body: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectu
+s veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates ex!
+Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assum
+enda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta,
+ sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit.",
+     published_at: null,
+     created_at: "2022-07-06 00:55:41",
+     updated_at: "2022-07-06 00:55:41",
+   }
+
+>>> Post::pluck('title')
+=> Illuminate\Support\Collection {#3871
+     all: [
+       "Judul Pertama",
+       "Judul Kedua",
+     ],
+   }
+
+>>> Post::find(2)
+=> App\Models\Post {#3547
+     id: 2,
+     title: "Judul Kedua",
+     excerpt: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci dele
+ctus veniam fugit totam itaque qui blanditiis maxime nostrum,",
+     body: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus, iste vero. Facere natus adipisci delectu
+s veniam fugit totam itaque qui blanditiis maxime nostrum, vitae aliquid ea eius aliquam quia sint ipsum voluptates ex!
+Quas delectus veniam quos qui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assum
+enda sint consequatur porro reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta,
+ sunt velit repudiandae nostrum voluptas a architecto qui ipsa culpa accusamus, cum impedit. Quas delectus veniam quos q
+ui, repellat iure. Ratione hic minus maxime libero, molestiae impedit vel omnis commodi assumenda sint consequatur porro
+ reprehenderit fuga ex fugiat consequuntur nam itaque nemo eaque sunt mollitia natus! Soluta, sunt velit repudiandae nos
+trum voluptas a architecto qui ipsa culpa accusamus, cum impedit.",
+     published_at: null,
+     created_at: "2022-07-06 00:57:28",
+     updated_at: "2022-07-06 00:57:28",
+   }
+
+>>>
+
+=====================================================================================================================
+
+Menambahkan data post dengan method create
+
+kita bisa memasukan semua datanya sekaligus menggunakan array
+
+Post::create([
+    'title' => 'Judul Keempat',
+    'excerpt' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asperiores ullam repudiandae',
+    'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asperiores ullam repudiandae, quasi itaque sint voluptatum vel fugit eos? Ratione eligendi harum velit. Ad, dolorum hic earum expedita, inventore porro quae ullam reiciendis obcaecati cupiditate consequatur blanditiis.</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, ullam vero! Saepe quas, suscipit aut voluptas nemo autem, dolorum ullam quia accusamus, eum totam eaque repudiandae! Quis, esse deleniti! Accusamus pariatur itaque, repellendus vel exercitationem facilis mollitia magni voluptatem officia?</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus laboriosam accusantium perspiciatis delectus aperiam enim eius nemo temporibus, quos necessitatibus exercitationem at minima magni impedit quibusdam velit deleniti ipsam rem laborum obcaecati nostrum maiores. Incidunt ad fuga quas cum magni.</p>'
+])
+
+
+Thinkpad X240@Yazz803 MINGW64 ~
+$ cd C://
+
+Thinkpad X240@Yazz803 MINGW64 /c
+$ cd Users/Thinkpad\ X240/Documents/LaravelApp/coba-laravel/
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan tinker
+Psy Shell v0.11.6 (PHP 8.0.10 — cli) by Justin Hileman
+>>> Post::create([
+...     'title' => 'Judul Keempat',
+...     'excerpt' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asper
+iores ullam repudiandae',
+...     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asper
+iores ullam repudiandae, quasi itaque sint voluptatum vel fugit eos? Ratione eligendi harum velit. Ad, dolorum hic earum
+ expedita, inventore porro quae ullam reiciendis obcaecati cupiditate consequatur blanditiis.</p><p>Lorem ipsum dolor si
+t amet consectetur adipisicing elit. Iste, ullam vero! Saepe quas, suscipit aut voluptas nemo autem, dolorum ullam quia
+accusamus, eum totam eaque repudiandae! Quis, esse deleniti! Accusamus pariatur itaque, repellendus vel exercitationem f
+acilis mollitia magni voluptatem officia?</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus labor
+iosam accusantium perspiciatis delectus aperiam enim eius nemo temporibus, quos necessitatibus exercitationem at minima
+magni impedit quibusdam velit deleniti ipsam rem laborum obcaecati nostrum maiores. Incidunt ad fuga quas cum magni.</p>
+'
+... ])
+[!] Aliasing 'Post' to 'App\Models\Post' for this Tinker session.
+Illuminate\Database\Eloquent\MassAssignmentException with message 'Add [title] to fillable property to allow mass assign
+ment on [App\Models\Post].'
+>>>
+
+Nah ini ada error, karena gk bisa begitu saja masuk, ada error yaitu mass assignment, jadi gk boleh banyak property begitu langsung dimasukan ke dalam table, defaultnya gk boleh, kecuali kita kasi tau bahwa properti2 ini boleh diisi, caranya adalah kita harus bikin sebuah properti yg namanya fillable di dalam model post kita. jadi ini boleh diisi pake cara create, karena creat itu mass assignment. 
+
+
+Thinkpad X240@Yazz803 MINGW64 ~/Documents/LaravelApp/coba-laravel
+$ php artisan tinker
+Psy Shell v0.11.6 (PHP 8.0.10 — cli) by Justin Hileman
+>>> Post::create([
+...     'title' => 'Judul Keempat',
+...     'excerpt' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asper
+iores ullam repudiandae',
+...     'body' => '<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asper
+iores ullam repudiandae, quasi itaque sint voluptatum vel fugit eos? Ratione eligendi harum velit. Ad, dolorum hic earum
+ expedita, inventore porro quae ullam reiciendis obcaecati cupiditate consequatur blanditiis.</p><p>Lorem ipsum dolor si
+t amet consectetur adipisicing elit. Iste, ullam vero! Saepe quas, suscipit aut voluptas nemo autem, dolorum ullam quia
+accusamus, eum totam eaque repudiandae! Quis, esse deleniti! Accusamus pariatur itaque, repellendus vel exercitationem f
+acilis mollitia magni voluptatem officia?</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus labor
+iosam accusantium perspiciatis delectus aperiam enim eius nemo temporibus, quos necessitatibus exercitationem at minima
+magni impedit quibusdam velit deleniti ipsam rem laborum obcaecati nostrum maiores. Incidunt ad fuga quas cum magni.</p>
+'
+... ])
+[!] Aliasing 'Post' to 'App\Models\Post' for this Tinker session.
+=> App\Models\Post {#3553
+     title: "Judul Keempat",
+     excerpt: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asperiores u
+llam repudiandae",
+     body: "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae adipisci, harum facilis asperiores u
+llam repudiandae, quasi itaque sint voluptatum vel fugit eos? Ratione eligendi harum velit. Ad, dolorum hic earum expedi
+ta, inventore porro quae ullam reiciendis obcaecati cupiditate consequatur blanditiis.</p><p>Lorem ipsum dolor sit amet
+consectetur adipisicing elit. Iste, ullam vero! Saepe quas, suscipit aut voluptas nemo autem, dolorum ullam quia accusam
+us, eum totam eaque repudiandae! Quis, esse deleniti! Accusamus pariatur itaque, repellendus vel exercitationem facilis
+mollitia magni voluptatem officia?</p><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus laboriosam a
+ccusantium perspiciatis delectus aperiam enim eius nemo temporibus, quos necessitatibus exercitationem at minima magni i
+mpedit quibusdam velit deleniti ipsam rem laborum obcaecati nostrum maiores. Incidunt ad fuga quas cum magni.</p>",
+     updated_at: "2022-07-06 01:34:42",
+     created_at: "2022-07-06 01:34:42",
+     id: 4,
+   }
+
+>>>
+
+udh bisa nambahin data pake method create, karena udh dikasi properti filablenya di file post.php yg ada di model
+
+==========================================================================================================================
+
+cara update data field 
+
+Post::find(3)->update(['title' => 'Judul ke tiga berubah'])
+ini akan mengupdate title berdasarkan id yg ada di table post
+
+Post::where(['title', 'Judul ke tiga berubah'])->update(['excerpt' => 'excerpt ke tiga berubah'])
+ini akan mengupdate excerpt yg dimana titlenya itu Judul ke tiga berubah (ini sama dengan yg di SQL, 'WHERE id = $id' gitu)
+
+==========================================================================================================================
+
+Route Model Binding
+pada saat kita menyuntikkan sebuah ID dari model kita ke dalam Route kita atau ke dalam Controller, yg biasa kita lakukan adalah kita akan query record yg kita cari berdasarkan ID tadi.
+Tugas Route Model Binding adalah nge-skip apa yg kita lakukan tadi, jadi si laravelnya akan langsung nge query-in supaya dapet langsung data sesuai dengan apa yang kita cari tanpa harus kirimin ID terus kita query sendiri, jadi secara otomatis mengirimkan instances dari model yg sesuai.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

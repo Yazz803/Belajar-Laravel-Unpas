@@ -1,0 +1,9 @@
+# 419 | PAGE EXPIRED
+
+CSRF (Cross Side Request Forgery) Protection
+CSRF ini adalah sebuah teknik serangan terhadap website kita, dimana serangan ini memalsukan (forgery) request dari website yg lain, jadi istilahnya ngebajak website kita, jadi bisa aja ada request yg dilakukan oleh website lain ke website kita, menggunakan url yg sesuai, jadi yg akan di kerjakan route tertentu di dalam aplikasi kita, padahal itu requestnya bukan dari website kita, melainkan dari website orang lain
+
+Di laravel ada solusinya, namanya Preventing CSRF Requests, jadi kita akan menjaga requestnya agar selalu dikirimkan dari website kita, dengan menggunakan csrf_token, jadi nanti website kita akan mengenerate sebuah token didalam session, dan nanti akan dicocokan dengan yg ada di requestnya, kalo sama berarti aman. 
+
+cara menggunakannnya adalah kita hanya perlu menuliskan @csrf di dalam form kita, nah nanti dibelakang layar, blade kita akan menerjemahkan @csrf ini jadi <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+

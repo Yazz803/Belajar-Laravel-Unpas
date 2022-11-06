@@ -1,0 +1,12 @@
+# file storage
+
+Laravel sudah menyediakan sebuah filesystem yg powerfull karena ada library atau package yg namanya Flysystem. jadi nanti kedepannya kalo kalian mau integrasikan aplikasi kalian agar bisa mengupload ke beberapa tempat, misalnya di local (komputer), lewat FTP di server yg punya kalian sendiri (SFTP), atau bahkan leewat Amazon S3, di tempat penyimpanan terpisah, atau mau sekaligus ketiga-tiganya bisa.cuma nanti yg akan kita lakukan adalah ke local dulu aja.
+
+cara mengaturnya ada di file configuration file system (config/filesystems.php)
+
+folder public yg ada di folder storage, itu harus kita hubungkan dulu dengan folder public yg ada di dalam aplikasi kita. cara untuk menghubungkannya adalah kita menggunakan yg namanya symbolic link
+
+caranya kita tinggal tulis php artisan storage:link di terminal kita, supaya nanti nyambungin antar public-nya aplikasi kita sama public nya storage. dan nanti jika kita ingin mengakses file-nya, kita tinggal pake method yg namanya asset, contoh "asset('storage/file.txt')"
+
+ketika berhasil menghubungkannya, kita lihat di folder public kita ada folder storage, nah ini dia artinya symbolic link, tempat aslinya adalah di dalam storage. jadi nanti apapun yang ada di dalam storage, muncul di folder public/storage.
+

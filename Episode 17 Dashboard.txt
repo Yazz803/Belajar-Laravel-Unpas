@@ -1,0 +1,29 @@
+#Resource Controllers
+kalo misalkan kita menganggap sebuah model di eloquent kita sebagai "resource" itu merupakan sebuah kumpulan aksi yg biasanya kita bikin untuk melakukan sesuatu terhadap resource kita, contohnya bayangin aja aplikasi kita ada fotonya atau movie, nah biasanya kan kita akan melakukan tambah(create), baca/lihat detail(read), update, dan delete. 
+
+karena ini sudah umum dilakukan sebagai use case, laravel membuatkan sebuah route khusus untuk melakukan CRUD yg dinamakan resource controller.
+
+cara bikiinya pada saat kita ketika make:controller pada saat di Artisannya, kita tambahkan --resource diakhirnya, sehingga nanti otomatis dibuatkan controller yang sudah punya Route ke path misal /photos, /photos/create, /photos/{photo}, dll
+
+nanti didalam route web.php nya kita gk perlu bikin satu2 untuk tiap route diatas.
+Route::resource('photos', PhotoController::class);
+cukup buat baris code diatas, udah menangani itu semua
+
+# Specifying The Resource Model
+jadi kita bisa langsung menentukan Route model binding untuk controller baru kita, kita akan ngasih tau bahwa controller yg kita punya, selain dia bentuknya resource, dia juga langsung terhubung ke model yg mana
+contoh : php artisan make:controller DashboardPostController --resource --model=Post
+
+# Route Model Binding | Costomizing The Key
+terkadang kita pengennya agar si eloquent ini mencari model menggunakan colomn selain 'id'. untuk melakukan ini kita hraus ngasih tau column-nya di dalam model, caranya kita bisa tulis di Route parameter.
+contoh : 
+Route::get('/posts/{post:slug}', function (Post $post){
+	return $post;
+}
+
+Kalau kita maunya si modelnya selalu menggunakan column di database selain id, gk manual kayak diatas, caranya kita akan timpa menggunakan sebuah method getRouteKeyName didalam model kita.
+code :
+public function getRouteKeyName()
+{
+	return 'slug';
+}
+

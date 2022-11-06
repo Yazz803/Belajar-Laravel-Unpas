@@ -1,0 +1,20 @@
+# Authorization
+
+selain dari layanan autentikasi(authentication itu usernya udah login atau belum, sedangkan otorisasi itu setelah login usernya bisa ngapain), laravel juga menyediakan cara sederhana untuk melakukan otorisasi dari aksi user terhadap sumber dayanya atau terhadap halaman2nya. 
+contohnya meskipun seorang user itu sudah ter-autentikasi atau sudah bisa login, user tersebut bisa saja tidak punya hak akses ke update dan delete dari model tertentu didalam database, jadi dia sudah login, melihat data bisa, tapi edit dan hapus tidak bisa, itu namanya otorisasi.
+
+fitur otorisasi di laravel ini menyediakan sebuah cara yang mudah dan terorganisir untuk mengelola pemeriksaan/pengecekan hak akses ini. ada 2 cara utama di dalam laravel untuk melakukan otorisasi, dengan menggunakan yang namanya 'gates' atau 'policies'. yg lebih simple itu 'gates' jadi nanti kita ngasih pagar ke tempat2 yg seorang user itu gk boleh akses, sedangkan policies itu lebih kompleks dari pada gates.
+
+
+
+
+# buat middleware sendiri
+caranya ketik php artisan make middleware namanyaApa
+nanti ketika sudah membuat middlewarenya, file itu ada di folder app/http/middleware
+untuk bisa menjalankan middlewarenya, kita masuk dulu ke folder app/http/kernel.php, ini supaya middleware kita didaftarin disini.
+
+# bagaimana cara membuat gates untuk bagian dari aplikasi-nya
+
+jadi gates adalah sebuah cara yang bagus untuk mempelajari dasar2 dari orotisasi laravel, meskipun kalau misalkan nanti kalian mau bikin aplikasinya udah cukup kompleks, kalian harus memikirkan juga untuk menggunakan yg namanya 'policies' supaya aturan otorisasi kalian lebih ter-organisir lagi, jadi kalo mau kompleks pakai 'policies' ada banyak misalkan ada moderator, ada author, ada admin, superadmin, dll.
+
+cara bikin gates adalah kalian cukup nanti bikin sebuah closure atau function untuk menentukan apakah seorang user itu memiliki akses untuk melakukan aksi tertentu. umumnya gates ini didefinisikan di dalam method 'boot' di file App\Providers\AuthServiceProvider, nanti kita bikinnya pake sebuah facade yang namanya gate. gates ini selalu menerima instance user sebagai argumen pertamanya, jadi otomatis tau user yg lagi login-nya siapa, sehingga nanti kita bisa kasih user tersebut bisa ngapain aja, bisa juga kita tambahin argumen tambahan, contohnya adalah model yg relevant
